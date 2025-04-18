@@ -96,7 +96,7 @@ This project is under active development. Currently supported:
 - [x] Go project detection and Dockerfile generation
 - [ ] Complete Node.js support
 - [ ] Complete Python support
-- [] docker-compose generation
+- [ ] docker-compose generation
 - [ ] Container dependency detection
 
 ## Development
