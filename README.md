@@ -1,10 +1,6 @@
 # DockerGen
 
 > Simple, smart Docker file generation for your projects
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Go Report Card](https://goreportcard.com/badge/github.com/Babatunde50/dockergen)](https://goreportcard.com/report/github.com/Babatunde50/dockergen)
-
 ## Overview
 
 DockerGen is a CLI tool that automatically generates optimized Docker and docker-compose files for your projects. It intelligently analyzes your codebase to detect the project type, dependencies, and configuration, then creates tailored Docker files that follow best practices.
@@ -94,9 +90,9 @@ FROM alpine:latest
 This project is under active development. Currently supported:
 
 - [x] Go project detection and Dockerfile generation
-- [ ] Complete Node.js support
-- [ ] Complete Python support
-- [ ] docker-compose generation
+- [ ] Multi-language support
+- [x] docker-compose generation
+- [ ] docker-compose interaction
 - [ ] Container dependency detection
 
 ## Development
