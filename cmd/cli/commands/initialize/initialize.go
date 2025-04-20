@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/Babatunde50/dockergen/internal/detector"
 	"github.com/Babatunde50/dockergen/internal/generator"
@@ -81,10 +82,36 @@ var Command = &cli.Command{
 		if err != nil {
 			return fmt.Errorf("failed to write Dockerfile: %v", err)
 		}
-
 		fmt.Printf("✅ Generated Dockerfile for %s project\n", project.Type)
+
+		// Generate docker-compose.yml
+		if cCtx.Bool("compose") {
+			dockerComposeContent, err := generator.GenerateDockerCompose(getProjectName(project), fmt.Sprintf("%d", project.Port))
+
+			if err != nil {
+				return fmt.Errorf("failed to write docker-compose.yml: %v", err)
+			}
+
+			err = os.WriteFile(dockerComposeFilePath, []byte(dockerComposeContent), 0644)
+			if err != nil {
+				return fmt.Errorf("failed to write docker-compose.yml: %v", err)
+			}
+
+			fmt.Printf("✅ Generated docker-compose.yml for %s project\n", project.Type)
+		}
 
 		fmt.Println("🚀 Dockerization complete!")
 		return nil
 	},
+}
+
+func getProjectName(project *detector.Project) string {
+
+	baseName := filepath.Base(project.WorkDir)
+
+	baseName = strings.ToLower(baseName)
+	baseName = strings.ReplaceAll(baseName, " ", "-")
+	baseName = strings.ReplaceAll(baseName, "_", "-")
+
+	return baseName
 }
